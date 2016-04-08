@@ -27,7 +27,7 @@ repositories {
 dependencies {
     compile 'io.reactivex:rxjava:1.0.7'
 
-    compile 'com.github.yongjhih:LruCache:-SNAPSHOT'
+    compile 'com.github.yongjhih:java-util:-SNAPSHOT'
     //testCompile "org.mockito:mockito-core:1.+"
 }
 
