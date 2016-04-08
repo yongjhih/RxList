@@ -50,6 +50,7 @@ android {
 dependencies {
     compile 'io.reactivex:rxjava:1.0.7'
 
+    compile 'com.android.support:support-v4:20.0.0' // LruCache
     //testCompile "org.mockito:mockito-core:1.+"
 }
 
