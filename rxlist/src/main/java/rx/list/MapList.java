@@ -10,23 +10,54 @@ import java.util.ListIterator;
 
 import java.util.LruCache;
 
-public class MapList<E> extends ArrayList<E> {
-    private List<? extends Object> mData;
-    private Mapper<E> mMapper;
+/**
+ * Mapper.
+ *
+ * Example:
+ *
+ * ```java
+ * return new MapList<ParseNotification, Notification>(notifications) {
+ *     @Override
+ *     public Notification map(ParseNotification notification) {
+ *         return SimpleParse.load(Notification.class, notification);
+ *     }
+ * };
+ * ```
+ */
+public class MapList<T, E> extends ArrayList<E> implements ListMappable<T, E>, Mappable<T, E>, Filter<E> {
+    private List<T> mList;
+    protected Mappable<T, E> mMapper;
+    protected ListMappable<T, E> mIndexMapper;
+    protected Filter<E> mFilter;
     protected LruCache<Integer, E> mCache;
 
     public MapList() {
         super();
     }
 
-    public MapList(List<? extends Object> data, Mapper<E> mapper) {
-        this();
+    public MapList(List<T> list) {
+        this(list, null, null);
+    }
 
-        mData = Collections.emptyList();
-        if (data != null) {
-            mData = data;
+    public MapList(List<T> list, Mappable<T, E> mapper) {
+        this(list, mapper, null);
+    }
+
+    public MapList(List<T> list, ListMappable<T, E> mapper) {
+        this(list, null, mapper);
+    }
+
+    private MapList(List<T> list, Mappable<T, E> mapper, ListMappable<T, E> indexMapper) {
+        super();
+
+        mList = Collections.emptyList();
+        if (list != null) {
+            mList = list;
         }
-        mMapper = mapper;
+
+        mMapper = mapper == null ? this : mapper;
+        mIndexMapper = indexMapper == null ? this : indexMapper;
+        mFilter = this;
         mCache = new LruCache<Integer, E>(1000);
     }
 
@@ -34,7 +65,15 @@ public class MapList<E> extends ArrayList<E> {
     public E get(int index) {
         E ret = mCache.get(index);
         if (ret == null) {
-            ret = mMapper.map(mData, index);
+            ret = mIndexMapper.map(mList, index);
+            if (ret == null) {
+                ret = mMapper.map(mList.get(index));
+            }
+
+            if (!mFilter.filter(ret)) {
+                return null;
+            }
+
             if (ret != null) {
                 mCache.put(index, ret);
             }
@@ -43,11 +82,25 @@ public class MapList<E> extends ArrayList<E> {
     }
 
     public E update(int index) {
-        E ret = mMapper.map(mData, index);
+        E ret = mIndexMapper.map(mList, index);
+        if (ret == null) {
+            ret = mMapper.map(mList.get(index));
+        }
+
         if (ret != null) {
             mCache.put(index, ret);
         }
         return ret;
+    }
+
+    @Override
+    public boolean filter(E item) {
+        return true;
+    }
+
+    public MapList filter(Filter filter) {
+        mFilter = filter;
+        return this;
     }
 
     @Override
@@ -82,7 +135,7 @@ public class MapList<E> extends ArrayList<E> {
 
     @Override
     public int size() {
-        return mData.size();
+        return mList.size();
     }
 
     @Override
@@ -102,17 +155,21 @@ public class MapList<E> extends ArrayList<E> {
 
     @Override
     public void clear() {
-        mData = Collections.emptyList();
+        mList = Collections.emptyList();
         mCache.evictAll();
     }
 
-    public List<? extends Object> getData() {
-        return mData;
+    public List<T> getData() {
+        return getList();
+    }
+
+    public List<T> getList() {
+        return mList;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> collection) {
-        if (!mData.isEmpty()) {
+        if (!mList.isEmpty()) {
             return false;
         }
 
@@ -120,7 +177,7 @@ public class MapList<E> extends ArrayList<E> {
             return false;
         }
 
-        mData = ((MapList) collection).getData();
+        mList = ((MapList) collection).getData();
         return true;
     }
 
@@ -196,7 +253,23 @@ public class MapList<E> extends ArrayList<E> {
         return -1;
     }
 
-    public interface Mapper<E> {
-        E map(List<? extends Object> data, int index);
+    @Override
+    public E map(List<T> list, int index) { // abstract
+        return (E) null;
+    }
+
+    @Override
+    public E map(T item) { // abstract
+        return (E) null;
+    }
+
+    public MapList map(Mappable<T, E> mapper) {
+        mMapper = mapper;
+        return this;
+    }
+
+    public MapList index(ListMappable<T, E> mapper) {
+        mIndexMapper = mapper;
+        return this;
     }
 }

@@ -25,7 +25,7 @@ Observable.zip(Observable.from(mLocations), Observable.from(mImages), (location,
 public class RxMapList<R, E> extends ArrayList<E> {
     private Observable<R> mObservable;
     private Transformer<R, E> mTransformer;
-    private MapList<E> mMapList;
+    private MapList<R, E> mMapList;
     private RxList<R> mList;
 
     public RxMapList() {
@@ -69,7 +69,7 @@ public class RxMapList<R, E> extends ArrayList<E> {
         return mMapList.size();
     }
 
-    public MapList<E> get() {
+    public MapList<R, E> get() {
         return mMapList;
     }
 
