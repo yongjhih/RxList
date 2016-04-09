@@ -1,5 +1,49 @@
 # RxList
 
+Observable as List.
+
+## Usage
+
+rx.list.RxList:
+
+```java
+List<ParseUser> users = new RxList<>(ParseObservable.find(ParseUser.getQuery()));
+```
+
+## Bonus
+
+rx.list.SimpleMapList:
+
+```java
+List<ParseUser> users = new SimpleMapList<FriendRequest, ParseUser>(getIdolsQuery().find())
+                            .map(request -> request.getToUser());
+```
+
+rx.list.RxMapList:
+
+```java
+List<Post> posts = RxMapList.create(post.getCachedPosts(), obs -> obs.map(p -> new ParsePost(p).setIsMainPost(false)));
+```
+
+rx.list.MapList:
+
+```java
+List<MediaEvent> events = new MapList<>(datas, new MapList.Mapper<MediaEvent>() {
+    @Override
+    public MediaEvent map(List<? extends Object> data, int index) {
+        MediaEvent event;
+        Object object = data.get(index);
+        if (object instanceof MediaEvent) {
+            event = (MediaEvent) object;
+        } else {
+            event = MediaEvent.loadFromJson(new JSONObject((Map<?, ?>) object).toString());
+        }
+        event.document = docs.get(index);
+        return event;
+    }
+});
+```
+
 ## Installation
 
 ```gradle
