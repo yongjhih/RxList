@@ -1,5 +1,6 @@
 package rx.list;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,11 +24,12 @@ import java.util.LruCache;
  * };
  * ```
  */
-public class SimpleMapList<T, E> extends MapList<E> implements ListMappable<T, E>, Mappable<T, E>, Filter<E> {
+public class SimpleMapList<T, E> extends ArrayList<E> implements ListMappable<T, E>, Mappable<T, E>, Filter<E> {
     private List<T> mList;
     protected Mappable<T, E> mMapper;
     protected ListMappable<T, E> mIndexMapper;
     protected Filter<E> mFilter;
+    protected LruCache<Integer, E> mCache;
 
     public SimpleMapList() {
         super();
@@ -79,7 +81,6 @@ public class SimpleMapList<T, E> extends MapList<E> implements ListMappable<T, E
         return ret;
     }
 
-    @Override
     public E update(int index) {
         E ret = mIndexMapper.map(mList, index);
         if (ret == null) {
@@ -103,8 +104,53 @@ public class SimpleMapList<T, E> extends MapList<E> implements ListMappable<T, E
     }
 
     @Override
+    public Object[] toArray() {
+        int s = size();
+        Object[] result = new Object[s];
+        for (int i = 0; i < s; i++) {
+            result[i] = get(i);
+        }
+        return result;
+    }
+
+    @Override
+    public <T> T[] toArray(T[] contents) {
+        int s = size();
+        if (contents.length < s) {
+            @SuppressWarnings("unchecked")
+            T[] newArray = (T[]) Array.newInstance(contents.getClass().getComponentType(), s);
+            contents = newArray;
+        }
+
+        for (int i = 0; i < s; i++) {
+            contents[i] = (T) get(i);
+        }
+
+        if (contents.length > s) {
+            contents[s] = null;
+        }
+
+        return contents;
+    }
+
+    @Override
     public int size() {
         return mList.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return listIterator();
+    }
+
+    @Override
+    public ListIterator<E> listIterator() {
+        return listIterator(0);
     }
 
     @Override
@@ -113,7 +159,6 @@ public class SimpleMapList<T, E> extends MapList<E> implements ListMappable<T, E
         mCache.evictAll();
     }
 
-    @Override
     public List<T> getData() {
         return getList();
     }
@@ -132,8 +177,80 @@ public class SimpleMapList<T, E> extends MapList<E> implements ListMappable<T, E
             return false;
         }
 
-        mList = ((MapList) collection).getData();
+        mList = ((SimpleMapList) collection).getData();
         return true;
+    }
+
+    @Override
+    public ListIterator<E> listIterator(final int i) {
+        return new ListIterator<E>() {
+            private int index = i;
+
+            @Override
+            public boolean hasNext() {
+                return index < size();
+            }
+
+            @Override
+            public E next() {
+                return get(index++);
+            }
+
+            @Override
+            public void add(E event) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return index > 0;
+            }
+
+            @Override
+            public int nextIndex() {
+                return index + 1;
+            }
+
+            @Override
+            public E previous() {
+                return get(--index);
+            }
+
+            @Override
+            public int previousIndex() {
+                return index - 1;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void set(E event) {
+                throw new UnsupportedOperationException();
+            }
+        };
+
+    }
+
+    @Override
+    public int indexOf(Object object) {
+        int s = size();
+        if (object != null) {
+            for (int i = 0; i < s; i++) {
+                if (object.equals(get(i))) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < s; i++) {
+                if (get(i) == null) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
