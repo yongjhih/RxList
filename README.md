@@ -15,7 +15,7 @@ List<String> lengthList = new RxList<>(Observable.from(Arrays.asList("Hello", "W
 rx.list.MapList:
 
 ```java
-List<Integer> lengthList = new SimpleMapList<String, Integer>(Arrays.asList("Hello", "World!"))
+List<Integer> lengthList = new MapList<String, Integer>(Arrays.asList("Hello", "World!"))
                                .map(name -> name.length());
 ```
 
