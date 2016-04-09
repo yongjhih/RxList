@@ -7,7 +7,7 @@ Observable as List.
 rx.list.RxList:
 
 ```java
-List<String> users = new RxList<>(Observable.from(Arrays.asList("Hello", "World!")));
+List<String> lengthList = new RxList<>(Observable.from(Arrays.asList("Hello", "World!")));
 ```
 
 ## Bonus
@@ -16,7 +16,7 @@ rx.list.SimpleMapList:
 
 ```java
 List<Integer> lengthList = new SimpleMapList<String, Integer>(Arrays.asList("Hello", "World!"))
-                            .map(name -> name.length());
+                               .map(name -> name.length());
 ```
 
 rx.list.RxMapList:
