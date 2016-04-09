@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import android.support.v4.util.LruCache;
+import java.util.LruCache;
 
 public class MapList<E> extends ArrayList<E> {
     private List<? extends Object> mData;

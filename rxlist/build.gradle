@@ -5,24 +5,16 @@ buildscript {
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:2.5.0'
-        classpath 'com.android.tools.build:gradle:2.0.0-beta7'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
 
-apply plugin: 'com.android.library'
+apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'me.tatarka.retrolambda'
 
 retrolambda {
-    // ```bash
-    // export JAVA8_HOME="/usr/lib/jvm/java-8-oracle"
-    // export JAVA7_HOME="/usr/lib/jvm/java-7-oracle"
-    // export JAVA_HOME="$JAVA8_HOME"
-    // ```
-    //jvmArgs '-noverify'
     jdk System.getenv("JAVA8_HOME")
-    //oldJdk System.getenv("JAVA_HOME")
     oldJdk System.getenv("JAVA7_HOME")
     javaVersion JavaVersion.VERSION_1_7
 }
@@ -32,25 +24,10 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 22
-    }
-}
-
 dependencies {
     compile 'io.reactivex:rxjava:1.0.7'
 
-    compile 'com.android.support:support-v4:20.0.0' // LruCache
+    compile 'com.github.yongjhih:LruCache:-SNAPSHOT'
     //testCompile "org.mockito:mockito-core:1.+"
 }
 
