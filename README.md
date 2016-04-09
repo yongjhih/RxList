@@ -2,8 +2,8 @@
 
 Observable as List.
 
-created by @Wendly, Mon., Jul. 28, 2014
-exported by @yongjhih, 2016
+* created by @Wendly, Mon., Jul. 28, 2014
+* exported by @yongjhih, 2016
 
 ## Usage
 
