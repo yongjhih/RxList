@@ -25,7 +25,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih:LruCache:-SNAPSHOT'
+    compile project(':rxlist')
+    compile 'io.reactivex:rxjava:1.0.7'
     //testCompile "org.mockito:mockito-core:1.+"
 }
 
@@ -46,7 +47,7 @@ def getRepositoryPassword() {
 publish {
     userOrg = 'yongjhih'
     groupId = 'com.infstory'
-    artifactId = 'rxlist'
+    artifactId = 'rxlist-rxjava'
     publishVersion = '1.0.0'
     desc = 'Reactive List'
     website = 'https://github.com/yongjhih/RxList'

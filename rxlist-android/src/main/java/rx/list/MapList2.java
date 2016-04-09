@@ -15,7 +15,7 @@ import android.support.v4.util.LruCache;
  * Example:
  *
  * ```java
- * return new SimpleMapList<ParseNotification, Notification>(notifications) {
+ * return new MapList<ParseNotification, Notification>(notifications) {
  *     @Override
  *     public Notification map(ParseNotification notification) {
  *         return SimpleParse.load(Notification.class, notification);
@@ -23,7 +23,7 @@ import android.support.v4.util.LruCache;
  * };
  * ```
  */
-public class SimpleMapList2<T, T2, E> extends SimpleMapList<T, E> implements ListMappable2<T, T2, E>, Mappable2<T, T2, E>, Filter2<T, T2, E>, Filter<E> {
+public class MapList2<T, T2, E> extends MapList<T, E> implements ListMappable2<T, T2, E>, Mappable2<T, T2, E>, Filter2<T, T2, E>, Filter<E> {
     private List<T> mList;
     private List<T2> mList2;
     protected Mappable2<T, T2, E> mMapper;
@@ -31,19 +31,19 @@ public class SimpleMapList2<T, T2, E> extends SimpleMapList<T, E> implements Lis
     protected Filter<E> mFilter;
     protected Filter2<T, T2, E> mFilter2;
 
-    public SimpleMapList2(List<T> list, List<T2> list2) {
+    public MapList2(List<T> list, List<T2> list2) {
         this(list, list2, null, null);
     }
 
-    public SimpleMapList2(List<T> list, List<T2> list2, Mappable2<T, T2, E> mapper) {
+    public MapList2(List<T> list, List<T2> list2, Mappable2<T, T2, E> mapper) {
         this(list, list2, mapper, null);
     }
 
-    public SimpleMapList2(List<T> list, List<T2> list2, ListMappable2<T, T2, E> mapper) {
+    public MapList2(List<T> list, List<T2> list2, ListMappable2<T, T2, E> mapper) {
         this(list, list2, null, mapper);
     }
 
-    private SimpleMapList2(List<T> list, List<T2> list2, Mappable2<T, T2, E> mapper, ListMappable2<T, T2, E> indexMapper) {
+    private MapList2(List<T> list, List<T2> list2, Mappable2<T, T2, E> mapper, ListMappable2<T, T2, E> indexMapper) {
         super();
 
         mList = Collections.emptyList();
@@ -99,12 +99,12 @@ public class SimpleMapList2<T, T2, E> extends SimpleMapList<T, E> implements Lis
         return true;
     }
 
-    public SimpleMapList2 filter(Filter filter) {
+    public MapList2 filter(Filter filter) {
         mFilter = filter;
         return this;
     }
 
-    public SimpleMapList2 filter(Filter2 filter) {
+    public MapList2 filter(Filter2 filter) {
         mFilter2 = filter;
         return this;
     }
@@ -168,12 +168,12 @@ public class SimpleMapList2<T, T2, E> extends SimpleMapList<T, E> implements Lis
         return (E) null;
     }
 
-    public SimpleMapList map(Mappable2<T, T2, E> mapper) {
+    public MapList map(Mappable2<T, T2, E> mapper) {
         mMapper = mapper;
         return this;
     }
 
-    public SimpleMapList index(ListMappable2<T, T2, E> mapper) {
+    public MapList index(ListMappable2<T, T2, E> mapper) {
         mIndexMapper = mapper;
         return this;
     }

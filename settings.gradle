@@ -1,2 +1,4 @@
 include ':rxlist'
-//include ':rxlist-android'
+include ':rxlist-rxjava'
+include ':rxlist-android'
+include ':rxlist-android-rxjava'
