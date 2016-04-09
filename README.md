@@ -7,7 +7,7 @@ Observable as List.
 rx.list.RxList:
 
 ```java
-List<ParseUser> users = new RxList<>(ParseObservable.find(ParseUser.getQuery()));
+List<String> users = new RxList<>(Observable.from(Arrays.asList("Hello", "World!")));
 ```
 
 ## Bonus
@@ -15,31 +15,30 @@ List<ParseUser> users = new RxList<>(ParseObservable.find(ParseUser.getQuery()))
 rx.list.SimpleMapList:
 
 ```java
-List<ParseUser> users = new SimpleMapList<FriendRequest, ParseUser>(getIdolsQuery().find())
-                            .map(request -> request.getToUser());
+List<Integer> lengthList = new SimpleMapList<String, Integer>(Arrays.asList("Hello", "World!"))
+                            .map(name -> name.length());
 ```
 
 rx.list.RxMapList:
 
 ```java
-List<Post> posts = RxMapList.create(post.getCachedPosts(), obs -> obs.map(p -> new ParsePost(p).setIsMainPost(false)));
+List<Integer> lengthList = RxMapList.create(Observable.from(Arrays.asList("Hello", "World!")), obs -> obs.map(name -> name.length()));
 ```
 
 rx.list.MapList:
 
 ```java
-List<MediaEvent> events = new MapList<>(datas, new MapList.Mapper<MediaEvent>() {
+List<Integer> lengthList = new MapList<>(Arrays.asList("Hello", "World!"), new MapList.Mapper<Integer>() {
     @Override
-    public MediaEvent map(List<? extends Object> data, int index) {
-        MediaEvent event;
+    public Integer map(List<? extends Object> data, int index) {
+        Integer length;
         Object object = data.get(index);
-        if (object instanceof MediaEvent) {
-            event = (MediaEvent) object;
+        if (object instanceof Integer) {
+            length = (Integer) object;
         } else {
-            event = MediaEvent.loadFromJson(new JSONObject((Map<?, ?>) object).toString());
+            length = ((String) data).length();
         }
-        event.document = docs.get(index);
-        return event;
+        return length;
     }
 });
 ```
