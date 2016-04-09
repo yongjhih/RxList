@@ -71,7 +71,7 @@ def getRepositoryPassword() {
 publish {
     userOrg = 'yongjhih'
     groupId = 'com.infstory'
-    artifactId = 'rxlist'
+    artifactId = 'rxlist-android'
     publishVersion = '1.0.0'
     desc = 'Reactive List'
     website = 'https://github.com/yongjhih/RxList'
