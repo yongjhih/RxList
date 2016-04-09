@@ -36,8 +36,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih:rxlist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
-    compile 'com.github.yongjhih:rxlist-rxjava:1.0.0'
+    compile 'com.github.yongjhih.rxlist:rxlist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
+    compile 'com.github.yongjhih.rxlist:rxlist-rxjava:1.0.0'
 }
 ```
 
