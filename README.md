@@ -36,8 +36,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih:rxlist:1.0.1' // depends on unofficial yongjhih/jave-util@jar LruCache
-    compile 'com.github.yongjhih:rxlist-rxjava:1.0.1'
+    compile 'com.github.yongjhih:rxlist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
+    compile 'com.github.yongjhih:rxlist-rxjava:1.0.0'
 }
 ```
 
@@ -50,8 +50,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih.rxlist:rxlist-android:1.0.1' // depends on support-v4@aar LruCache
-    compile 'com.github.yongjhih.rxlist:rxlist-android-rxjava:1.0.1' // depends on support-v4@aar LruCache
+    compile 'com.github.yongjhih.rxlist:rxlist-android:1.0.0' // depends on support-v4@aar LruCache
+    compile 'com.github.yongjhih.rxlist:rxlist-android-rxjava:1.0.0' // depends on support-v4@aar LruCache
 }
 ```
 
