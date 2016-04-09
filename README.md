@@ -12,7 +12,7 @@ List<String> lengthList = new RxList<>(Observable.from(Arrays.asList("Hello", "W
 
 ## Bonus
 
-rx.list.SimpleMapList:
+rx.list.MapList:
 
 ```java
 List<Integer> lengthList = new SimpleMapList<String, Integer>(Arrays.asList("Hello", "World!"))
@@ -23,24 +23,6 @@ rx.list.RxMapList:
 
 ```java
 List<Integer> lengthList = RxMapList.create(Observable.from(Arrays.asList("Hello", "World!")), obs -> obs.map(name -> name.length()));
-```
-
-rx.list.MapList:
-
-```java
-List<Integer> lengthList = new MapList<>(Arrays.asList("Hello", "World!"), new MapList.Mapper<Integer>() {
-    @Override
-    public Integer map(List<? extends Object> data, int index) {
-        Integer length;
-        Object object = data.get(index);
-        if (object instanceof Integer) {
-            length = (Integer) object;
-        } else {
-            length = ((String) data).length();
-        }
-        return length;
-    }
-});
 ```
 
 ## Installation
