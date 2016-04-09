@@ -46,6 +46,8 @@ List<MediaEvent> events = new MapList<>(datas, new MapList.Mapper<MediaEvent>() 
 
 ## Installation
 
+rxlist for java project @ jar:
+
 ```gradle
 repositories {
     jcenter()
@@ -53,7 +55,20 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih:rxlist:1.0.0'
+    compile 'com.github.yongjhih:rxlist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
+}
+```
+
+or, rxlist-android for android project @ aar:
+
+```gradle
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.yongjhih.rxlist:rxlist-android:1.0.1' // depends on support-v4@aar LruCache
 }
 ```
 
