@@ -1,4 +1,4 @@
+include ':lazylist'
 include ':rxlist'
-include ':rxlist-rxjava'
+include ':lazylist-android'
 include ':rxlist-android'
-include ':rxlist-android-rxjava'

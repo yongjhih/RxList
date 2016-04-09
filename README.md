@@ -1,4 +1,4 @@
-# RxList
+# LazyList
 
 Observable as List.
 
@@ -27,7 +27,7 @@ List<Integer> lengthList = RxMapList.create(Observable.from(Arrays.asList("Hello
 
 ## Installation
 
-rxlist for java project @ jar:
+lazylist for java project @ jar:
 
 ```gradle
 repositories {
@@ -36,12 +36,12 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih.rxlist:rxlist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
-    compile 'com.github.yongjhih.rxlist:rxlist-rxjava:1.0.0'
+    compile 'com.github.yongjhih.lazylist:lazylist:1.0.0' // depends on unofficial yongjhih/jave-util@jar LruCache
+    compile 'com.github.yongjhih.lazylist:rxlist:1.0.0'
 }
 ```
 
-or, rxlist-android for android project @ aar:
+or, lazylist-android for android project @ aar:
 
 ```gradle
 repositories {
@@ -50,8 +50,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.yongjhih.rxlist:rxlist-android:1.0.0' // depends on support-v4@aar LruCache
-    compile 'com.github.yongjhih.rxlist:rxlist-android-rxjava:1.0.0' // depends on support-v4@aar LruCache
+    compile 'com.github.yongjhih.lazylist:lazylist-android:1.0.0' // depends on support-v4@aar LruCache
+    compile 'com.github.yongjhih.lazylist:rxlist-android:1.0.0'
 }
 ```
 
