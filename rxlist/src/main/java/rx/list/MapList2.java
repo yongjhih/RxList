@@ -99,12 +99,12 @@ public class MapList2<T, T2, E> extends MapList<T, E> implements ListMappable2<T
         return true;
     }
 
-    public MapList2 filter(Filter filter) {
+    public MapList2<T, T2, E> filter(Filter filter) {
         mFilter = filter;
         return this;
     }
 
-    public MapList2 filter(Filter2 filter) {
+    public MapList2<T, T2, E> filter(Filter2 filter) {
         mFilter2 = filter;
         return this;
     }
@@ -168,12 +168,12 @@ public class MapList2<T, T2, E> extends MapList<T, E> implements ListMappable2<T
         return (E) null;
     }
 
-    public MapList map(Mappable2<T, T2, E> mapper) {
+    public MapList2<T, T2, E> map(Mappable2<T, T2, E> mapper) {
         mMapper = mapper;
         return this;
     }
 
-    public MapList index(ListMappable2<T, T2, E> mapper) {
+    public MapList2<T, T2, E> index(ListMappable2<T, T2, E> mapper) {
         mIndexMapper = mapper;
         return this;
     }

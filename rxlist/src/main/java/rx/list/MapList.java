@@ -98,7 +98,7 @@ public class MapList<T, E> extends ArrayList<E> implements ListMappable<T, E>, M
         return true;
     }
 
-    public MapList filter(Filter filter) {
+    public MapList<T, E> filter(Filter filter) {
         mFilter = filter;
         return this;
     }
@@ -263,12 +263,12 @@ public class MapList<T, E> extends ArrayList<E> implements ListMappable<T, E>, M
         return (E) null;
     }
 
-    public MapList map(Mappable<T, E> mapper) {
+    public MapList<T, E> map(Mappable<T, E> mapper) {
         mMapper = mapper;
         return this;
     }
 
-    public MapList index(ListMappable<T, E> mapper) {
+    public MapList<T, E> index(ListMappable<T, E> mapper) {
         mIndexMapper = mapper;
         return this;
     }
