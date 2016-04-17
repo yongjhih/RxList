@@ -10,20 +10,6 @@ import java.util.ListIterator;
 
 import android.support.v4.util.LruCache;
 
-/**
- * Mapper.
- *
- * Example:
- *
- * ```java
- * return new MapList<ParseNotification, Notification>(notifications) {
- *     @Override
- *     public Notification map(ParseNotification notification) {
- *         return SimpleParse.load(Notification.class, notification);
- *     }
- * };
- * ```
- */
 public class MapList<T, E> extends ArrayList<E> implements ListMappable<T, E>, Mappable<T, E>, Filter<E> {
     private List<T> mList;
     protected Mappable<T, E> mMapper;
