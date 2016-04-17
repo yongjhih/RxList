@@ -1,3 +1,7 @@
+[![JitPack](https://img.shields.io/github/tag/yongjhih/RxList.svg?label=JitPack)](https://jitpack.io/#yongjhih/RxList)
+[![Maven Central](https://img.shields.io/maven-central/v/net.sourceforge.RxList/RxList.svg?maxAge=2592000)](http://mvnrepository.com/artifact/net.sourceforge.RxList/RxList)
+[![Build Status](https://travis-ci.org/yongjhih/RxList.svg)](https://travis-ci.org/yongjhih/RxList)
+
 # RxList
 
 Observable as List.
