@@ -50,13 +50,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'de.hdodenhof:circleimageview:1.3.0'
 
-    compile 'com.github.yongjhih.RxList:rxlist:-SNAPSHOT' // depends on unofficial yongjhih/jave-util@jar LruCache
-    compile 'com.github.yongjhih.RxList:rxlist-rxjava:-SNAPSHOT'
     compile 'com.github.yongjhih.RxList:rxlist-android:-SNAPSHOT' // depends on support-v4@aar LruCache
     compile 'com.github.yongjhih.RxList:rxlist-android-rxjava:-SNAPSHOT' // depends on support-v4@aar LruCache
-    //compile 'com.github.yongjhih.streamsupport:streamsupport:-SNAPSHOT'
-    //compile project(':streamsupport')
-    //compile project(':streamsupport-atomic')
-    //compile project(':streamsupport-flow')
-    //compile project(':streamsupport-cfuture')
 }
