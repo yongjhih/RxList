@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.yongjhih.RxList:rxlist:-SNAPSHOT' // depends on support-v4@aar LruCache
+    compile 'com.github.yongjhih.RxList:rxlist-rxjava:-SNAPSHOT' // depends on support-v4@aar LruCache
+}
