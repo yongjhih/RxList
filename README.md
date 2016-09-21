@@ -65,7 +65,7 @@ dependencies {
 
 ```
 lazylist.filter(predication);
-for (Item i : lazylist) {}; // while (!iter.predication()) iter.next();
+for (Item i : lazylist) {}; // if (!iter.predication()) iter.next();
 ```
 
 ## LICENSE
